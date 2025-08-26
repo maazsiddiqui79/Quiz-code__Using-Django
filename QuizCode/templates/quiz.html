@@ -1,77 +1,98 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Quiz | {{sub.name}}</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Quiz | {{sub.name}}</title>
 
-    <!-- Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
 
-    <style>
-        .question-card {
-            transition: transform 0.3s, box-shadow 0.3s;
-        }
+  <style>
+    .question-card {
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+    .question-card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 16px rgba(0,0,0,0.15);
+    }
 
-        .question-card:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 8px 16px rgba(0,0,0,0.15);
-        }
-    </style>
+    body {
+      margin: 0;
+      background: linear-gradient(270deg, #ff6a00, #ee0979, #06beb6, #48b1bf);
+      background-size: 800% 800%;
+      animation: gradientMove 12s ease infinite;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    main {
+      flex: 1; /* pushes footer down */
+    }
+
+    @keyframes gradientMove {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+  </style>
 </head>
 <body class="bg-light">
 
-    <div class="text-center text-dark bg-primary p-4 container"
-     style="border-top-left-radius: 50px; border-top-right-radius: 50px;margin-top: 5rem;">
+<main>
+  <div class="text-center text-dark bg-primary p-4 container"
+       style="border-top-left-radius: 50px; border-top-right-radius: 50px;margin-top: 5rem;">
     <h1>Quiz: {{sub.name}}</h1>
     <hr style="width: 300px; margin: 0 auto; border: 2px solid #000;">
-</div>
+  </div>
 
-<div class="con container py-5"
-     style="margin-bottom:2rem;background-color:rgba(242, 238, 232, 0.454);box-shadow: 0 8px 20px rgba(0,0,0,0.3);">
+  <div class="container bg-white py-5"
+       style="margin-bottom:2rem;background-color:rgba(242, 238, 232, 0.454);box-shadow: 0 8px 20px rgba(0,0,0,0.3);">
     <form action="{% url 'quiz' subject_id=sub.id %}" method="post">
-        {% csrf_token %}
-        {% for i in ques %}
-        <div class="card question-card mb-4 p-3 shadow-sm">
-            <h5 class="mb-3">{{ i.question_text }}</h5>
+      {% csrf_token %}
+      {% for i in ques %}
+      <div class="card question-card mb-4 p-3 shadow-sm">
+        <h5 class="mb-3">{{ i.question_text }}</h5>
 
-            <div class="form-check mb-2">
-                <input class="form-check-input" type="radio" name="{{ i.id }}" id="{{ i.id }}" value="1">
-                <label class="form-check-label" for="{{ i.id }}">{{ i.option1 }}</label>
-            </div>
-
-            <div class="form-check mb-2">
-                <input class="form-check-input" type="radio" name="{{ i.id }}" id="{{ i.id }}" value="2">
-                <label class="form-check-label" for="{{ i.id }}">{{ i.option2 }}</label>
-            </div>
-
-            <div class="form-check mb-2">
-                <input class="form-check-input" type="radio" name="{{ i.id }}" id="{{ i.id }}" value="3">
-                <label class="form-check-label" for="{{ i.id }}">{{ i.option3 }}</label>
-            </div>
-
-            <div class="form-check mb-2">
-                <input class="form-check-input" type="radio" name="{{ i.id }}" id="{{ i.id }}" value="4">
-                <label class="form-check-label" for="{{ i.id }}">{{ i.option4 }}</label>
-            </div>
+        <div class="form-check mb-2">
+          <input class="form-check-input" type="radio" name="{{ i.id }}" value="1" id="q{{ i.id }}-1">
+          <label class="form-check-label" for="q{{ i.id }}-1">{{ i.option1 }}</label>
         </div>
-        {% endfor %}
 
-        <div class="text-center mt-4">
-            <button type="submit" class="btn btn-success btn-lg px-5">Submit Quiz</button>
+        <div class="form-check mb-2">
+          <input class="form-check-input" type="radio" name="{{ i.id }}" value="2" id="q{{ i.id }}-2">
+          <label class="form-check-label" for="q{{ i.id }}-2">{{ i.option2 }}</label>
         </div>
+
+        <div class="form-check mb-2">
+          <input class="form-check-input" type="radio" name="{{ i.id }}" value="3" id="q{{ i.id }}-3">
+          <label class="form-check-label" for="q{{ i.id }}-3">{{ i.option3 }}</label>
+        </div>
+
+        <div class="form-check mb-2">
+          <input class="form-check-input" type="radio" name="{{ i.id }}" value="4" id="q{{ i.id }}-4">
+          <label class="form-check-label" for="q{{ i.id }}-4">{{ i.option4 }}</label>
+        </div>
+      </div>
+      {% endfor %}
+
+      <div class="text-center mt-4">
+        <button type="submit" class="btn btn-success btn-lg px-5">Submit Quiz</button>
+      </div>
     </form>
-</div>
+  </div>
+</main>
 
-<!-- Bootstrap JS Bundle -->
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-
-</body>
-<footer class="bg-dark text-light py-3 fixed-bottom">
+<footer class="bg-dark text-light py-3">
   <div class="container text-center text-decoration-none">
     <small>
-      &copy; 2025 | Quiz Code App | ~Built and designed by Maaz Siddiqui 
+      &copy; 2025 | Quiz Code App | ~Built and designed by Maaz Siddiqui
     </small>
   </div>
 </footer>
+
+<!-- Bootstrap JS Bundle -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
 </html>

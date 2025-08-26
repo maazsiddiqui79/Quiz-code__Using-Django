@@ -73,3 +73,12 @@ def add_new_subject(request):
         
         
     return render(request,'new_subject.html',{'all_sub':all_sub})
+
+def delete_subject(request,del_id):
+    del_sub = get_object_or_404(Subject,pk=del_id)
+    del_sub.delete()
+    
+    
+    return redirect('add_new_subject') #it must match to url name
+
+
