@@ -1,7 +1,5 @@
-{% extends "base.html" %}
-
-{% block title %}Select Subject{% endblock %}
-
+{% extends "base.html" %} 
+{% block title %}Select Subject{% endblock %} 
 {% block style %}
 <style>
   .subject-card {
@@ -18,27 +16,41 @@
   /* Gradient background */
   body {
     margin: 0;
-    background: linear-gradient(270deg, #ff6a008e, #ee097898, #06beb584, #48b1bf94);
+    background: linear-gradient(270deg, #ee097868, #06beb56e, #48b1bf81);
     background-size: 800% 800%;
     animation: gradientMove 12s ease infinite;
     min-height: 100vh;
     display: flex;
     flex-direction: column;
   }
+  .mybtn:hover {
+    box-shadow: 5px 5px 20px 5px rgba(0, 0, 0, 0.29);
+    background-color: antiquewhite;
+    color: black;
+    transform: translatey(-5px);
+  }
+
+  .mybtn {
+    transition: all 0.3s ease;
+  }
 
   @keyframes gradientMove {
-    0% { background-position: 0% 50%; }
-    50% { background-position: 100% 50%; }
-    100% { background-position: 0% 50%; }
+    0% {
+      background-position: 0% 50%;
+    }
+    50% {
+      background-position: 100% 50%;
+    }
+    100% {
+      background-position: 0% 50%;
+    }
   }
 
   main {
     flex: 1; /* pushes footer down */
   }
 </style>
-{% endblock style %}
-
-{% block body %}
+{% endblock style %} {% block body %}
 <main>
   <div class="container py-5">
     <h1 class="text-center mb-5">Select a Subject</h1>
@@ -46,10 +58,17 @@
       {% for i in subjects %}
       <div class="col-md-4 col-sm-6">
         <div class="subject-card h-100 text-center">
-          <div class="d-flex flex-column justify-content-center" style="background-color: rgba(255, 255, 255, 0);padding:20px;">
+          <div
+            class="d-flex flex-column justify-content-center"
+            style="background-color: rgba(255, 255, 255, 0); padding: 20px"
+          >
             <h5 class="card-title">{{ i }}</h5>
             <p class="card-text">Click below to start the quiz for {{ i }}.</p>
-            <a href="{% url 'quiz' i.id %}" class="btn btn-outline-light btn-dark mt-auto">Start Quiz</a>
+            <a
+              href="{% url 'quiz' i.id %}"
+              class="mybtn btn btn-light btn-dark mt-auto"
+              >Start Quiz</a
+            >
           </div>
         </div>
       </div>

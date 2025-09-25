@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 
-{% block title %}Quiz | {{sub.name}}{% endblock %}
+{% block title %}Quiz | {{sub.name}}{% endblock title %}
 
 {% block style %}
 <style>
@@ -14,12 +14,7 @@
 
   body {
     margin: 0;
-    background: linear-gradient(270deg,
-    cornflowerblue,
-    rgba(135, 173, 242, 0.674),
-    aquamarine,
-    indianred
-  );
+    background: linear-gradient(270deg, #ee097868, #06beb56e, #48b1bf81);
     background-size: 800% 800%;
     animation: gradientMove 12s ease infinite;
     min-height: 100vh;

@@ -1,46 +1,61 @@
-{% extends "base.html" %}
-
-{% block title %}Quiz | Result{% endblock %}
+{% extends "base.html" %} {% block title %}Quiz | Result{% endblock %} 
 {% block style %}
 <style>
   body {
-    background-color: rgba(152, 183, 241, 0.381);
+    background: linear-gradient(270deg, #ee097868, #06beb56e, #48b1bf81);
   }
 </style>
 
-{% endblock style %}
-{% block body %}
+{% endblock style %} {% block body %}
 <div class="d-flex justify-content-end">
-  <a href="/" class="btn btn-outline-light border-2 ps-5 pe-5 my-3 mx-2 bg-dark text-white border-white">Home</a>
+  <a
+    href="/"
+    class="btn btn-outline-light border-2 ps-5 pe-5 my-3 mx-2 bg-dark text-white border-white"
+    >Home</a
+  >
 </div>
 
 <div class="container mt-4 p-3">
-    <h1 class="display-5 fw-bolder font-monospace text-center">Quiz Completed!</h1>
-    <hr style="width: 600px;margin:0 auto;border:2px solid rgb(0, 0, 0);margin-top:1rem">
+  <h1 class="display-5 fw-bolder font-monospace text-center">
+    Quiz Completed!
+  </h1>
+  <hr
+    style="
+      width: 600px;
+      margin: 0 auto;
+      border: 2px solid rgb(0, 0, 0);
+      margin-top: 1rem;
+    "
+  />
 </div>
 
-<p class="text-center display-4 text-success mt-0">Your Score: {{score}} / {{total}}</p>
+<p class="text-center display-4 text-success mt-0">
+  Your Score: {{score}} / {{total}}
+</p>
 
 <div class="container text-capitalize text-center my-4">
-  <div class="container col-5 d-flex align-items-center justify-content-between">
+  <div
+    class="container col-5 d-flex align-items-center justify-content-between"
+  >
     <h3>{{msg|safe}}</h3>
     {% if score > total|divisibleby:2 %}
-    <a href="{% url 'subject_list' %}" class="btn btn-outline-dark border-1 mt-5">More Quizes</a>        
+    <a
+      href="{% url 'subject_list' %}"
+      class="btn btn-outline-dark border-1 mt-5"
+      >More Quizes</a
+    >
     {% endif %}
   </div>
 
-  <a class="btn btn-outline-dark border-1 mt-3" href="{% url 'quiz' retry %}">Try Again</a>
+  <a class="btn btn-outline-dark border-1 mt-3" href="{% url 'quiz' retry %}"
+    >Try Again</a
+  >
 </div>
-{% endblock body %}
-
-
-
-
-{% block footer %}
+{% endblock body %} {% block footer %}
 <footer class="bg-dark text-light py-3 fixed-bottom">
   <div class="container text-center text-decoration-none">
     <small>
-      &copy; 2025 | Quiz Code App | ~Built and designed by Maaz Siddiqui 
+      &copy; 2025 | Quiz Code App | ~Built and designed by Maaz Siddiqui
     </small>
   </div>
 </footer>
