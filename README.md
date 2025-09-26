@@ -148,7 +148,7 @@ Easily add new question to expand your quiz.
 
 **Developed by:** _Maaz Irshad Siddiqui_
 
-- 🌐 **Portfolio:** [the-maaz-portfolio.com](https://the-maaz-portfolio.onrender.com)
+- 🌐 **Portfolio:** [the-maaz-portfolio.com](https://the-maaz-portfolio.vercel.app)
 - 💼 **LinkedIn:** [linkedin/siddiqui-maazzz.com](https://www.linkedin.com/in/siddiqui-maazzz/)
 - 📞 **Contact:** +91 8850281310
 
