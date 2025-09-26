@@ -26,7 +26,7 @@
     }
     
     button,
-    a {
+    .alink {
         border: 2px solid black;
         color: black;
         text-decoration: none;
@@ -53,6 +53,8 @@
         box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.3);
         background-color: black;
         color: whitesmoke;
+        
+        
     }
 
     .hrr {
@@ -75,23 +77,23 @@
     <div class="hrr1"></div>
 </div>
 
+
 {% if messages %}
 {% for i in messages %}
 <div class="alert alert-{{i.tags}} fade show " role="alert">
     <strong>{{i}}</strong>
-    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    <button type="button" class="btn-close " data-bs-dismiss="alert" aria-label="Close"></button>
 </div>
 {% endfor %}
 {% endif %}
-
 <div class="col-12 shadow-lg container d-flex justify-content-center align-items-center  py-5"
-    style="border-radius: 20px;background-color:rgba(0, 0, 0, 0.304)">
+style="border-radius: 20px;background-color:rgba(0, 0, 0, 0.304)">
 
     <form action="/add_new_question" method="post">
         {% csrf_token %}
         <div class="col-8 container me-4 ms-4 ">
             <label class="" style="font-family: 'Times New Roman', Times, serif;font-size:x-large;"
-                for="sub_name">Subject Name</label>
+            for="sub_name">Subject Name</label>
 
             <select name="sub_name" id="sub_name" class="my-input" required>
                 <option value="" disabled selected>Select the correct option</option>
@@ -111,6 +113,7 @@
         <div class="col-8 container me-4 ms-4 ">
             <label class="" style="font-family: 'Times New Roman', Times, serif;font-size:x-large;"
                 for="opt1">Option1</label> <br>
+
             <input class="my-input" type="text" name="opt1" id="opt1" required placeholder="opt1"
                 style="width: 500px;" autocomplete="off">
         </div>

@@ -10,22 +10,25 @@
     margin-bottom: 25px;
   }
 
+  
   button,
-  a {
-    border: 2px black solid;
+  .a-link {
+    border: 1px black solid;
     color: black;
+    font-weight: lighter;
     text-decoration: none;
     transition: all 0.1s ease-in-out;
     padding-left: 15px;
     padding-right: 15px;
     margin-right: 15px;
     margin-bottom: 15px;
+    
     border-radius: 5px;
     background-color: aliceblue;
   }
 
   button:hover,
-  a:hover {
+  .a-link:hover {
     text-decoration: none;
     transform: scale(1.2);
     box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.3);
@@ -71,22 +74,26 @@
 
 <div class="col-12 shadow-lg container d-flex justify-content-center align-items-center  py-5"
      style="border-radius: 20px;background-color:rgba(0, 0, 0, 0.285)">
+
   <form action="/add_new_subject" method="post">
+
     {% csrf_token %}
+
     <div class="col-8 container me-4 ms-4">
+
       <label style="font-family: 'Times New Roman', Times, serif; font-size: x-large; color:rgb(0, 0, 0)" for="subname">
         Add a new subject
       </label>
       <br />
-      <input class="my-input" type="text" name="subname" id="subname" required
-             placeholder="enter the new subject/topic/quiz name" style="width: 400px" autocomplete="off" />
+      <input class="my-input" type="text" name="subname" id="subname" required 
+      placeholder="enter the new subject/topic/quiz name" style="width: 400px" autocomplete="off" />
       <br />
     </div>
     <button type="submit">Add</button>
     {% if messages %}
-      <a href="/add_new_question" class="p-1">Add Questions</a>
+      <a class="a-link" href="/add_new_question" class="p-1">Add Questions</a>
     {% endif %}
-    <a href="/" class="p-1">Home</a>
+    <a class="a-link" href="/">Home</a>
   </form>
 
   <div class="col-4">
@@ -101,6 +108,8 @@
   </div>
 </div>
 
+
+
 <div class="container mt-3" style="width: 400px">
   <p class="text-center" style="font-size: x-large">List of all Subject</p>
   <div class="hrr mt-0 mb-4"></div>
@@ -111,7 +120,7 @@
     </thead>
     {% for i in all_sub %}
     <tr>
-      <td>{{i}} <a href="/delete_subject/{{i.id}}">Delete</a></td>
+      <td>{{i}} <a class="a-link" href="/delete_subject/{{i.id}}">Delete</a></td>
     </tr>
     {% endfor %}
   </table>

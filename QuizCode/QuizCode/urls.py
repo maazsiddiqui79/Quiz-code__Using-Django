@@ -25,5 +25,7 @@ urlpatterns = [
     path('add_new_question', views.add_new_question,name='add_new_question'),
     path('add_new_subject', views.add_new_subject,name='add_new_subject'),
     path('delete_subject/<int:del_id>', views.delete_subject, name='delete_subject'),
+    path('<str:xyz>/', views.invalid_url, name='invalid_url'),
+
 
 ]
