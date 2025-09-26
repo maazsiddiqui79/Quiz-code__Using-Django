@@ -154,4 +154,4 @@ Easily add new question to expand your quiz.
 
 ---
 
-_~Built with passion using Django, Bootstrap, and Python✨_
+_~Code Every Day, Grow Every Day✨_
