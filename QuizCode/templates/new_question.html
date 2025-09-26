@@ -1,159 +1,160 @@
 {% extends "base.html" %}
 
-{% block title %}Add new subject{% endblock %}
+{% block title %}Add new question{% endblock %}
 
 {% block style %}
 <style>
-    body {
-      margin: 0;
-      background: linear-gradient(270deg, #ee097868, #06beb56e, #48b1bf81);
-      background-size: 800% 800%;
-      animation: gradientMove 12s ease infinite;
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-    }
+  body {
+    margin: 0;
+    background: linear-gradient(270deg, #ee097868, #06beb56e, #48b1bf81);
+    background-size: 800% 800%;
+    animation: gradientMove 12s ease infinite;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+  }
 
-    @keyframes gradientMove {
-      0% { background-position: 0% 50%; }
-      50% { background-position: 100% 50%; }
-      100% { background-position: 0% 50%; }
+  @keyframes gradientMove {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+  }
+
+  .my-input {
+    border: 2px solid black;
+    padding: 7px;
+    margin-bottom: 25px;
+    width: 100%;
+    max-width: 500px;
+    box-sizing: border-box;
+  }
+
+  button, .alink {
+    border: 2px solid black;
+    color: black;
+    text-decoration: none;
+    transition: all 0.1s ease-in-out;
+    padding: 8px 15px;
+    margin: 10px 5px;
+    border-radius: 5px;
+    background-color: aliceblue;
+    cursor: pointer;
+  }
+
+  button:hover, .alink:hover {
+    transform: scale(1.1);
+    box-shadow: 0px 0px 5px rgba(0,0,0,0.3);
+    background-color: black;
+    color: whitesmoke;
+  }
+
+  .hrr, .hrr1 {
+    border-bottom: black 2px solid;
+    width: 50%;
+    max-width: 100%;
+    margin: auto ;
+  }
+
+  .form-container {
+    max-width: 800px;
+    width: 100%;
+    margin: auto;
+    padding: 20px;
+    border-radius: 20px;
+    background-color: rgba(0,0,0,0.3);
+  }
+
+  .col-8.container {
+    width: 100%;
+    margin: 10px 0;
+  }
+
+  @media (max-width: 768px) {
+    h1 {
+      font-size: 1.6rem;
     }
     .my-input {
-        border: 2px solid black;
-        padding: 7px;
-        margin-bottom: 25px;
+      max-width: 100%;
     }
-    
-    button,
-    .alink {
-        border: 2px solid black;
-        color: black;
-        text-decoration: none;
-        transition: all 0.1s ease-in-out;
-        padding-left: 15px;
-        padding-right: 15px;
-        margin-right: 15px;
-        margin-bottom: 15px;
-        border-radius: 5px;
-        background-color: aliceblue;
+    button, .alink {
+      width: 100%;
+      margin: 5px 0;
     }
-
-    button:hover{
-        text-decoration: none;
-        transform: scale(1.2);
-        box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.3);
-        background-color: black;
-        color: whitesmoke;
-    }
-
-    .alink:hover{
-        text-decoration: none;
-        font-size: 16px; 
-        box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.3);
-        background-color: black;
-        color: whitesmoke;
-        
-        
-    }
-
-    .hrr {
-        border-bottom: black 2px solid;
-        width: 370px;
-        margin: 0px auto;
-    }
-
     .hrr1 {
-        border-bottom: black 2px solid;
-        width: 650px;
-        margin: 5px auto;
+      width: 90%;
     }
+  }
 </style>
 {% endblock style %}
 
 {% block body %}
 <div class="container pt-3 mb-5 text-center font-monospace">
-    <h1 class=" display-5 fw-bold mt-5 ">Add a Questions To Exsiting Subjects</h1>
-    <div class="hrr1"></div>
+  <h1 class="display-5 fw-bold mt-5">Add Questions To Existing Subjects</h1>
+  <div class="hrr1"></div>
 </div>
-
 
 {% if messages %}
-{% for i in messages %}
-<div class="alert alert-{{i.tags}} fade show " role="alert">
-    <strong>{{i}}</strong>
-    <button type="button" class="btn-close " data-bs-dismiss="alert" aria-label="Close"></button>
-</div>
-{% endfor %}
+  {% for i in messages %}
+    <div class="alert alert-{{i.tags}} fade show" role="alert">
+      <strong>{{i}}</strong>
+      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+  {% endfor %}
 {% endif %}
-<div class="col-12 shadow-lg container d-flex justify-content-center align-items-center  py-5"
-style="border-radius: 20px;background-color:rgba(0, 0, 0, 0.304)">
 
-    <form action="/add_new_question" method="post">
-        {% csrf_token %}
-        <div class="col-8 container me-4 ms-4 ">
-            <label class="" style="font-family: 'Times New Roman', Times, serif;font-size:x-large;"
-            for="sub_name">Subject Name</label>
+<div class="col-12 shadow-lg form-container d-flex flex-column justify-content-center align-items-center py-5">
+  <form action="/add_new_question" method="post" class="w-100">
+    {% csrf_token %}
 
-            <select name="sub_name" id="sub_name" class="my-input" required>
-                <option value="" disabled selected>Select the correct option</option>
-                {% for i in all_sub %}
-                <option value="{{i}}">{{i}}</option>
-                {% endfor %}
-            </select>
-        </div>
+    <div class="col-8 container">
+      <label for="sub_name" style="font-family: 'Times New Roman', Times, serif; font-size:x-large;">Subject Name</label>
+      <select name="sub_name" id="sub_name" class="my-input" required>
+        <option value="" disabled selected>Select the correct option</option>
+        {% for i in all_sub %}
+        <option value="{{i}}">{{i}}</option>
+        {% endfor %}
+      </select>
+    </div>
 
-        <div class="col-8 container me-4 ms-4 ">
-            <label class="" style="font-family: 'Times New Roman', Times, serif;font-size:x-large;"
-                for="q_text">Question</label> <br>
-            <input class="my-input" type="text" name="q_text" id="q_text" required
-                placeholder="enter your qurstion here" style="width: 500px;" autocomplete="off">
-        </div>
+    <div class="col-8 container">
+      <label for="q_text" style="font-family: 'Times New Roman', Times, serif; font-size:x-large;">Question</label>
+      <input class="my-input" type="text" name="q_text" id="q_text" required placeholder="Enter your question here" autocomplete="off">
+    </div>
 
-        <div class="col-8 container me-4 ms-4 ">
-            <label class="" style="font-family: 'Times New Roman', Times, serif;font-size:x-large;"
-                for="opt1">Option1</label> <br>
+    <div class="col-8 container">
+      <label for="opt1" style="font-family: 'Times New Roman', Times, serif; font-size:x-large;">Option 1</label>
+      <input class="my-input" type="text" name="opt1" id="opt1" required placeholder="Option 1" autocomplete="off">
+    </div>
 
-            <input class="my-input" type="text" name="opt1" id="opt1" required placeholder="opt1"
-                style="width: 500px;" autocomplete="off">
-        </div>
+    <div class="col-8 container">
+      <label for="opt2" style="font-family: 'Times New Roman', Times, serif; font-size:x-large;">Option 2</label>
+      <input class="my-input" type="text" name="opt2" id="opt2" required placeholder="Option 2" autocomplete="off">
+    </div>
 
-        <div class="col-8 container me-4 ms-4 ">
-            <label class="" style="font-family: 'Times New Roman', Times, serif;font-size:x-large;"
-                for="opt2">Option2</label> <br>
-            <input class="my-input" type="text" name="opt2" id="opt2" required placeholder="opt1"
-                style="width: 500px;" autocomplete="off">
-        </div>
+    <div class="col-8 container">
+      <label for="opt3" style="font-family: 'Times New Roman', Times, serif; font-size:x-large;">Option 3</label>
+      <input class="my-input" type="text" name="opt3" id="opt3" required placeholder="Option 3" autocomplete="off">
+    </div>
 
-        <div class="col-8 container me-4 ms-4 ">
-            <label class="" style="font-family: 'Times New Roman', Times, serif;font-size:x-large;"
-                for="opt3">Option3</label> <br>
-            <input class="my-input" type="text" name="opt3" id="opt3" required placeholder="opt3"
-                style="width: 500px;" autocomplete="off">
-        </div>
+    <div class="col-8 container">
+      <label for="opt4" style="font-family: 'Times New Roman', Times, serif; font-size:x-large;">Option 4</label>
+      <input class="my-input" type="text" name="opt4" id="opt4" required placeholder="Option 4" autocomplete="off">
+    </div>
 
-        <div class="col-8 container me-4 ms-4 ">
-            <label class="" style="font-family: 'Times New Roman', Times, serif;font-size:x-large;"
-                for="opt4q_text">Option4</label> <br>
-            <input class="my-input" type="text" name="opt4" id="opt4" required placeholder="opt4"
-                style="width: 500px;" autocomplete="off">
-        </div>
+    <div class="col-8 container">
+      <label for="correct_option" style="font-family: 'Times New Roman', Times, serif; font-size:x-large;">Correct Option</label>
+      <select name="correct_option" id="correct_option" class="my-input" required>
+        <option value="" disabled selected>Select the correct option</option>
+        <option value="1">Option 1</option>
+        <option value="2">Option 2</option>
+        <option value="3">Option 3</option>
+        <option value="4">Option 4</option>
+      </select>
+    </div>
 
-        <div class="col-8 container me-4 ms-4 ">
-            <label class="" style="font-family: 'Times New Roman', Times, serif;font-size:x-large;"
-                for="correct_option">Correct Option</label>
-
-            <select name="correct_option" id="correct_option" class="my-input" required>
-                <option value="" disabled selected>Select the correct option</option>
-                <option value="1">Option1</option>
-                <option value="2">Option2</option>
-                <option value="3">Option3</option>
-                <option value="4">Option4</option>
-            </select>
-        </div>
-
-        <button type="submit">Add</button>
-        <a href="/" class="alink p-1">Home</a>
-    </form>
+    <button type="submit">Add</button>
+    <br><br>
+    <a href="/" class="alink">Home</a>
+  </form>
 </div>
 {% endblock body %}

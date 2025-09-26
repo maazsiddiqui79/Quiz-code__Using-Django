@@ -2,53 +2,90 @@
 {% block style %}
 <style>
   body {
-    background: linear-gradient(270deg, #ee097868, #06beb56e, #48b1bf81);
+  margin: 0;
+  background: linear-gradient(270deg, #ee097868, #06beb56e, #48b1bf81);
+  background-size: 800% 800%; /* necessary for animation */
+  animation: gradientMove 12s ease infinite;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+@keyframes gradientMove {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+
+  .btn-custom {
+    padding: 8px 15px;
+    margin: 5px;
+    border: 1px solid black;
+    text-decoration: none;
+    background-color: black;
+    color: white;
+    border-radius: 5px;
+    transition: all 0.2s ease-in-out;
+    cursor: pointer;
+  }
+
+  .btn-custom:hover {
+    transform: scale(1.05);
+    background-color: white;
+    color: black;
+    border-color: black;
+  }
+
+  .score-display {
+    font-size: 2rem;
+    margin-top: 10px;
+  }
+
+  .result-container {
+    max-width: 800px;
+    width: 100%;
+    margin: auto;
+    padding: 20px;
+    border-radius: 10px;
+    background-color: rgba(255, 255, 255, 0.2);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  }
+
+  @media (max-width: 768px) {
+    .score-display {
+      font-size: 1.5rem;
+    }
+    .btn-custom {
+      width: 100%;
+      margin: 5px 0;
+    }
+    .result-container {
+      padding: 15px;
+    }
+    hr {
+      width: 90%;
+    }
   }
 </style>
-
 {% endblock style %} {% block body %}
-<div class="d-flex justify-content-end">
-  <a
-    href="/"
-    class="btn btn-outline-light border-2 ps-5 pe-5 my-3 mx-2 bg-dark text-white border-white"
-    >Home</a
-  >
+<div class="d-flex justify-content-end px-3 pt-3">
+  <a href="/" class="btn btn-custom">Home</a>
 </div>
 
-<div class="container mt-4 p-3">
-  <h1 class="display-5 fw-bolder font-monospace text-center">
-    Quiz Completed!
-  </h1>
-  <hr
-    style="
-      width: 600px;
-      margin: 0 auto;
-      border: 2px solid rgb(0, 0, 0);
-      margin-top: 1rem;
-    "
-  />
-</div>
+<div class="result-container mt-4 text-center">
+  <h1 class="display-5 fw-bolder font-monospace">Quiz Completed!</h1>
+  <!-- <hr style="width: 600px; margin: 1rem auto; border: 2px solid black;"> -->
+  <p class="score-display text-success">Your Score: {{score}} / {{total}}</p>
 
-<p class="text-center display-4 text-success mt-0">
-  Your Score: {{score}} / {{total}}
-</p>
-
-<div class="container text-capitalize text-center my-4">
-  <div
-    class="container col-5 d-flex align-items-center justify-content-between"
-  >
+  <div class="mt-4 d-flex flex-column align-items-center">
     <h3>{{msg|safe}}</h3>
     {% if score > total|divisibleby:2 %}
-    <a
-      href="{% url 'subject_list' %}"
-      class="btn btn-outline-dark border-1 mt-5"
-      >More Quizes</a
+    <a href="{% url 'subject_list' %}" class="btn btn-custom mt-3"
+      >More Quizzes</a
     >
     {% endif %}
+    <a href="{% url 'quiz' retry %}" class="btn btn-custom mt-3">Try Again</a>
   </div>
-
-  <a class="btn btn-outline-dark border-1 mt-3" href="{% url 'quiz' retry %}"
-    >Try Again</a
-  >
 </div>
 {% endblock body %}

@@ -1,31 +1,37 @@
 <style>
-    main {
-      flex: 1; /* pushes footer down */
-    }
-    body {
+  main {
+    flex: 1;
+  }
+  body {
     margin: 0;
     display: flex;
     flex-direction: column;
     min-height: 100vh;
   }
-  a{
+  a {
     font-weight: bolder;
-    font-family:Verdana, Geneva, Tahoma, sans-serif;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
     text-decoration: none;
   }
-  
-  
   a:hover {
     text-decoration: underline;
-}
+  }
+
+  /* Responsive */
+  @media (max-width: 768px) {
+    footer small {
+      font-size: 0.8rem;
+    }
+  }
 </style>
-<body>
-  
-  <footer class="bg-dark text-light py-3 mt-4">
-    <div class="container text-center text-decoration-none">
-      <small>
-        &copy; 2025 | Quiz Code App | ~Built and designed by Maaz Siddiqui | <a target="_blank" href="https://the-maaz-portfolio.vercel.app/" >Portfolio</a>
-      </small>
-    </div>
-  </footer>
-</body>
+
+<footer class="bg-dark text-light py-3 mt-4">
+  <div class="container text-center text-decoration-none">
+    <small>
+      &copy; 2025 | Quiz Code App | Built and designed by Maaz Siddiqui |
+      <a target="_blank" href="https://the-maaz-portfolio.vercel.app/"
+        >Portfolio</a
+      >
+    </small>
+  </div>
+</footer>

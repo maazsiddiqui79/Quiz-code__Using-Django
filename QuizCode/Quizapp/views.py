@@ -27,7 +27,10 @@ def quiz(request,subject_id):
                 msg = "Don't worry, you'll do better next time! 💪"
             elif score>=total/2:
                 msg = "Champion! Keep up the great work! 🏅<br> New adventures await!🤜🤛"
-        return render(request,'result.html',{'score':score,'total':total,'retry':subject.id,"msg":msg})
+        try:
+          return render(request,'result.html',{'score':score,'total':total,'retry':subject.id,"msg":msg})
+        except Exception as e :
+          return redirect('invalid_url', xyz='quiz_error')
     
     return render(request,'quiz.html',{'sub':subject,'ques':questions})
 
