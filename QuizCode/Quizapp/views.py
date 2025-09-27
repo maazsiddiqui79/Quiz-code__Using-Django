@@ -19,6 +19,8 @@ def quiz(request,subject_id):
     if request.method == "POST":
         score = 0
         total = questions.count()
+        url_WA_shraing = request.build_absolute_uri(f"/quiz/{subject_id}")
+        
         for i in questions:
             selected = request.POST.get(str(i.id))
             if selected and int(selected) == i.correct_option:
@@ -26,9 +28,9 @@ def quiz(request,subject_id):
             if score<total/2:
                 msg = "Don't worry, you'll do better next time! 💪"
             elif score>=total/2:
-                msg = "Champion! Keep up the great work! 🏅<br> New adventures await!🤜🤛"
+                msg = "Champion! Keep up the great work! 🏅<br>New adventures await!🤜🤛"
         try:
-          return render(request,'result.html',{'score':score,'total':total,'retry':subject.id,"msg":msg})
+          return render(request,'result.html',{'score':score,'total':total,'retry':subject.id,"msg":msg,"url_WA_shraing":url_WA_shraing})
         except Exception as e :
           return redirect('invalid_url', xyz='quiz_error')
     

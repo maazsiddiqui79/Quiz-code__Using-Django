@@ -80,12 +80,20 @@
 
   <div class="mt-4 d-flex flex-column align-items-center">
     <h3>{{msg|safe}}</h3>
+    <a href="{% url 'quiz' retry %}" class="btn btn-custom mt-3">Try Again</a>
     {% if score > total|divisibleby:2 %}
     <a href="{% url 'subject_list' %}" class="btn btn-custom mt-3"
       >More Quizzes</a
     >
     {% endif %}
-    <a href="{% url 'quiz' retry %}" class="btn btn-custom mt-3">Try Again</a>
+    
+    <a href="https://wa.me/?text=I%20challenge%20you%20to%20try%20this%20quiz!%20Check%20it%20out%3A%20{{url_WA_shraing}}"
+   target="_blank"
+   class="btn btn-custom mt-3"
+   rel="noopener noreferrer">
+   Share on WhatsApp
+</a>
+
   </div>
 </div>
 {% endblock body %}
