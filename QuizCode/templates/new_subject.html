@@ -33,7 +33,7 @@
     border: 1px solid black;
     color: black;
     text-decoration: none;
-    transition: all 0.1s ease-in-out;
+    transition: all 0.3s ease-in-out;
     padding: 8px 15px;
     margin: 10px 5px;
     border-radius: 5px;
@@ -95,9 +95,7 @@
     }
   }
 </style>
-{% endblock style %}
-
-{% block body %}
+{% endblock style %} {% block body %}
 <div class="container pt-3 mb-5 text-center font-monospace">
   <h1 class="display-5 fw-bold mt-5">Add a new subject</h1>
   <div class="hrr1"></div>
@@ -108,14 +106,18 @@
     {% csrf_token %}
     <div class="col-8 container">
       <label for="subname" style="font-family: 'Times New Roman', Times, serif; font-size:x-large;">Add a new subject</label>
-      <input class="my-input" type="text" name="subname" id="subname" required placeholder="Enter the new subject/topic/quiz name" autocomplete="off">
+      <input class="my-input" type="text" name="subname" id="subname" required placeholder="Enter the new subject/topic/quiz " autocomplete="off">
+    </div>
+    <div class="col-8 container">
+      <label for="subhint" style="font-family: 'Times New Roman', Times, serif; font-size:x-large;">Add a hint</label>
+      <input class="my-input" type="text" name="subhint" id="subhint" placeholder="Enter the hint for subject/topic/quiz if needed" autocomplete="off">
     </div>
 
     <button type="submit" class="mb-4">Add</button>
     {% if messages %}
       <a class="a-link" href="/add_new_question">Add Questions</a>
     {% endif %}
-    <a class="a-link m-4" href="/">Home</a>
+    
   </form>
 
   {% if messages %}
@@ -130,23 +132,30 @@
   {% endif %}
 </div>
 
-<div class="container mt-3">
+<div class="container mt-3 ">
   <p class="text-center" style="font-size: x-large">List of all Subjects</p>
   <div class="hrr mt-0 mb-4"></div>
-
-  <table class="table table-striped table-hover text-center border border-dark">
+  
+  <div class="d-flex justify-content-center align-items-center">
+  <table class="table table-striped table-hover text-center border border-dark w-50 ">
     <thead>
       <tr>
-        <th>Subjects</th>
+        <th  style="background-color:#ffffff3f; padding:13px;">Subjects</th>
+        <th  style="background-color:#ffffff3f; padding:13px;">Action</th>
       </tr>
     </thead>
     <tbody>
       {% for i in all_sub %}
       <tr>
-        <td>{{i}} <a class="a-link" href="/delete_subject/{{i.id}}">Delete</a></td>
+        <td style="background-color:#ffffff3f; padding:13px;">{{i}}</td>
+        <td style="background-color:#ffffff3f; padding:13px;"><a class="a-link" href="/delete_subject/{{i.id}}" >Delete</a></td>
+        
       </tr>
+      
       {% endfor %}
     </tbody>
   </table>
+  
+  </div>
 </div>
 {% endblock body %}

@@ -19,6 +19,7 @@ from django.urls import path
 from Quizapp import views
 urlpatterns = [
     path('admin/', admin.site.urls),
+    
     path('', views.home_page , name='home_page'),
     path('subject/', views.subject_list,name='subject_list'),
     path('quiz/<int:subject_id>', views.quiz,name='quiz'),

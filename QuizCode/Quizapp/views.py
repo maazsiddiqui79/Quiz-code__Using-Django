@@ -1,5 +1,5 @@
 from django.shortcuts import render ,get_object_or_404 , redirect
-from Quizapp.models import Subject ,Question
+from Quizapp.models import Subject , Question
 from django.contrib import messages
 from django.http import HttpResponse
 
@@ -9,11 +9,19 @@ def home_page(request):
 
 def subject_list(request):
     subjects = Subject.objects.all()
+    
     return render(request,'subject_list.html',{'subjects':subjects})
 
 def quiz(request,subject_id):
     subject  = get_object_or_404(Subject,pk=subject_id)
+    # subject = c
     questions = Question.objects.filter(subject=subject)
+    hint = subject.q_hint_text
+    # ------- Testing Purpose only -------
+    # print(subject.id)
+    # print(subject.name)
+    # print(subject.q_hint_text)
+    # -------------------------------------
     
 
     if request.method == "POST":
@@ -34,7 +42,7 @@ def quiz(request,subject_id):
         except Exception as e :
           return redirect('invalid_url', xyz='quiz_error')
     
-    return render(request,'quiz.html',{'sub':subject,'ques':questions})
+    return render(request,'quiz.html',{'sub':subject,'ques':questions,'hint':hint})
 
 
 def add_new_question(request):
@@ -74,9 +82,10 @@ def add_new_subject(request):
     all_sub = Subject.objects.all()
     if request.method == 'POST':
         sub = request.POST.get('subname')
+        subhint = request.POST.get('subhint')
         
         if sub:
-            new_subject = Subject(name=sub)
+            new_subject = Subject(name=sub,q_hint_text=subhint)
             new_subject.save()
             messages.success(request,'Topic Added Successfully please Add Some Qustions')
             return redirect('add_new_subject') #it must match to url name
@@ -94,102 +103,6 @@ def delete_subject(request,del_id):
 def invalid_url(request, xyz):
     
     return HttpResponse("""
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-   <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link
-      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css"
-      rel="stylesheet"
-      integrity="sha384-LN+7fdVzj6u52u30Kp6M/trliBMCMKTyK833zpbD+pXdCLuTusPj697FH4R/5mcr"
-      crossorigin="anonymous"
-    />
-    <script
-      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"
-      integrity="sha384-ndDqU0Gzau9qJ1lfW4pNLlhNTkCfHzAVBReH9diLvGRem5+R9g2FzA8ZGN954O5Q"
-      crossorigin="anonymous"
-    ></script>
-
-  <title>Page Not Found</title>
-  <style>
-    body {
-      margin: 0;
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      min-height: 100vh;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      background: linear-gradient(270deg, #ee097868, #06beb56e, #48b1bf81);
-      background-size: 800% 800%;
-      animation: gradientMove 12s ease infinite;
-    }
-
-    @keyframes gradientMove {
-      0% { background-position: 0% 50%; }
-      50% { background-position: 100% 50%; }
-      100% { background-position: 0% 50%; }
-    }
-
-    .error-card {
-      background: rgba(255, 255, 255, 0.9);
-      padding: 50px;
-      border-radius: 20px;
-      box-shadow: 5px 5px 20px 5px rgba(0,0,0,0.29);
-      text-align: center;
-      max-width: 500px;
-      transition: all 0.3s ease-in-out;
-    }
-
-    .error-card:hover {
-      transform: translateY(-5px);
-      box-shadow: 5px 5px 25px 5px rgba(0,0,0,0.4);
-    }
-
-    .error-card h1 {
-      font-size: 80px;
-      margin-bottom: 10px;
-      color:cornflowerblue;
-      
-    }
-
-    .error-card h2 {
-      margin: 10px 0;
-      color: #333;
-    }
-
-    .error-card p {
-      font-size: 18px;
-      margin: 10px 0 20px 0;
-      color: #555;
-    }
-
-    .mybtn:hover {
-    box-shadow: 5px 5px 20px 5px rgba(0, 0, 0, 0.29);
-    background-color: antiquewhite;
-    color: black;
-    transform: translatey(-5px);
-  }
-
-  .mybtn {
-    transition: all 0.3s ease;
-  }
-
-  </style>
-</head>
-<body>
-  <div class="error-card">
-    <h1>404</h1>
-    <h2>Oops!</h2>
-    <p> You are trying to access a URL that does not exist or has never been created.</p>
-    <a href="/" class="mybtn btn btn-light btn-dark mt-auto">Go to Home Page</a>
-</div>
-
-</body>
-</html>
-   
-                        """)
+SORRY THERE IS <br> ERROR                        """)
 
 

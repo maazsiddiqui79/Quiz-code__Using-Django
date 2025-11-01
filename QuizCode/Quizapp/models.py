@@ -5,6 +5,9 @@ from django.db import models
 
 class Subject(models.Model):
     name = models.CharField(max_length=100)
+    # extra
+    q_hint_text = models.CharField(max_length=500, default="No hint available")
+
     
         
     def __str__(self):
@@ -14,6 +17,7 @@ class Subject(models.Model):
 class Question(models.Model):
     subject = models.ForeignKey(Subject,on_delete=models.CASCADE)
     question_text  = models.CharField(max_length=300)
+    
     option1  = models.CharField(max_length=100)
     option2  = models.CharField(max_length=100)
     option3  = models.CharField(max_length=100)

@@ -15,13 +15,21 @@
       crossorigin="anonymous"
     ></script>
 
-    {% block style %}{% endblock %}
-    <title>{% block title %}{% endblock %}</title>
+    {% block style %}
+    
+    {% endblock %}
+    <title>{% block title %}gdd{% endblock %}</title>
   </head>
   <body>
     <header></header>
-    <main>{% block body %}{% endblock body %}</main>
+    <main>{% block body %}
+      {% endblock body %}</main>
+    {% block maaz  %}
+    
+    {% endblock maaz  %}
 
     {% include "footer.html" %}
+    
+    
   </body>
 </html>

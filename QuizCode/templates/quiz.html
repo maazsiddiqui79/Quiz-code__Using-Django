@@ -7,9 +7,10 @@
   .question-cardd {
     transition: transform 0.3s, box-shadow 0.3s;
   }
+
   .question-cardd:hover {
     transform: translateY(-3px);
-    box-shadow: 0 8px 16px rgba(0,0,0,0.15);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
   }
 
   body {
@@ -23,16 +24,25 @@
   }
 
   @keyframes gradientMove {
-    0% { background-position: 0% 50%; }
-    50% { background-position: 100% 50%; }
-    100% { background-position: 0% 50%; }
+    0% {
+      background-position: 0% 50%;
+    }
+
+    50% {
+      background-position: 100% 50%;
+    }
+
+    100% {
+      background-position: 0% 50%;
+    }
   }
 </style>
 {% endblock style %}
 
 {% block body %}
 <main>
-  <div class="text-center text-dark p-4 container mt-4 shadow-lg" style="background-color:rgba(250, 235, 215, 0.132);border-radius:10px;margin-bottom: 30px;">
+  <div class="text-center text-dark p-4 container mt-4 shadow-lg"
+    style="background-color:rgba(250, 235, 215, 0.132);border-radius:10px;margin-bottom: 30px;">
     <h1>Quiz: {{sub.name}}</h1>
     <hr style="width: 600px; margin: 0 auto;">
   </div>
@@ -41,7 +51,8 @@
     {% csrf_token %}
     {% for i in ques %}
     <div class="container mb-0 mt-0" style="padding-bottom: 10px;">
-      <div class="card question-cardd p-4 shadow-lg" style="background-color:rgba(255, 255, 255, 0.315);
+      <div class="card question-cardd p-4 shadow-lg" 
+      style="background-color:rgba(255, 255, 255, 0.315);
       border:0px;
       box-shadow: 0 4px 20px rgba(44, 43, 43, 0.3);border-radius:10px">
         <h5 class="mb-3">{{ i.question_text }}</h5>
@@ -73,6 +84,26 @@
       <button type="submit" class="btn btn-success btn-lg px-5">Submit Quiz</button>
     </div>
   </form>
+  <br>
+  <div class="container mb-0 mt-0 d-flex justify-content-center" style="padding-bottom: 10px;padding-top: 10px;">
+    <div class="card question-cardd p-4 shadow-lg w-75" style="background-color:rgba(255, 255, 255, 0.315);
+      border:0px;
+      box-shadow: 0 4px 20px rgba(44, 43, 43, 0.3);border-radius:10px">
+      <details>
+        <summary class="d-flex justify-content-center">Get Some hint ▼</summary>
+        <div class="container question-cardd " style="background-color: rgba(0, 255, 255, 0.105);padding: 10px;border-radius:10px" role="alert">
+          <strong>{{hint}}</strong>
+          <br>
+          <br>
+          
+
+
+        </div>
+        <br><br>
+
+        
+      </details>
+    </div>
 </main>
 
 
