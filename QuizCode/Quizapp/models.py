@@ -28,3 +28,8 @@ class Question(models.Model):
         return self.question_text
     
     
+#     Migration process:
+#         python manage.py makemigrations
+#         python manage.py migrate
+    
+    

@@ -33,10 +33,11 @@ def quiz(request,subject_id):
             selected = request.POST.get(str(i.id))
             if selected and int(selected) == i.correct_option:
                 score+=1
-            if score<total/2:
-                msg = "Don't worry, you'll do better next time! 💪"
-            elif score>=total/2:
+                
+            if score>=total/2:
                 msg = "Champion! Keep up the great work! 🏅<br>New adventures await!🤜🤛"
+            elif score<total/2:
+                msg = "Don't worry, you'll do better next time! 💪"
         try:
           return render(request,'result.html',{'score':score,'total':total,'retry':subject.id,"msg":msg,"url_WA_shraing":url_WA_shraing})
         except Exception as e :
@@ -100,9 +101,65 @@ def delete_subject(request,del_id):
     
     return redirect('add_new_subject') #it must match to url name
 
-def invalid_url(request, xyz):
+def invalid_url(request, *args, **kwargs):
     
     return HttpResponse("""
-SORRY THERE IS <br> ERROR                        """)
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Error - Invalid URL</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+  
 
+  @keyframes gradientMove {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+  }
+    body {
+      height: 100vh;
+      margin: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: linear-gradient(90deg, #ee097868, #06beb56e, #48b1bf81);
 
+      font-family: 'Poppins', sans-serif;
+      background-size: 800% 800%;
+      animation: gradientMove 6s ease infinite;
+    }
+    
+    
+    .glass-card {
+      background: rgba(255, 255, 255, 0.2);
+      backdrop-filter: blur(10px);
+      border-radius: 16px;
+      padding: 50px 70px;
+      text-align: center;
+      color: #222;
+    }
+    .glass-card h1 {
+      font-weight: 700;
+      font-size: 2.5rem;
+    }
+    .glass-card p {
+      font-size: 1.2rem;
+    }
+    .btn-custom {
+      border-radius: 10px;
+      padding: 10px 20px;
+    }
+  </style>
+</head>
+<body>
+  <div class="glass-card">
+    <h1>Oops! Something went wrong 😕</h1>
+    
+    <p>Sorry, there seems to be an error or an invalid URL.</p>
+    <a href="/" class="btn btn-outline-dark mt-3 btn-custom">Go Home</a>
+  </div>
+</body>
+</html>
+""")

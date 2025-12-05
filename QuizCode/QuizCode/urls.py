@@ -22,11 +22,19 @@ urlpatterns = [
     
     path('', views.home_page , name='home_page'),
     path('subject/', views.subject_list,name='subject_list'),
+ 
     path('quiz/<int:subject_id>', views.quiz,name='quiz'),
+ 
     path('add_new_question', views.add_new_question,name='add_new_question'),
     path('add_new_subject', views.add_new_subject,name='add_new_subject'),
     path('delete_subject/<int:del_id>', views.delete_subject, name='delete_subject'),
-    path('<str:xyz>/', views.invalid_url, name='invalid_url'),
+    
+    path('subject/<str:xyz>/', views.invalid_url, name='invalid_url'),
+    path('quiz/<int:subject_id>/<str:xyz>/', views.invalid_url, name='invalid_url'),
+    path('add_new_question/<str:xyz>/', views.invalid_url, name='invalid_url'),
+    path('add_new_subject/<str:xyz>/', views.invalid_url, name='invalid_url'),
+    path('delete_subject/<int:del_id>/<str:xyz>/', views.invalid_url, name='invalid_url'),
+    path('<str:xyz>/', views.invalid_url, name='invalid_url')
 
 
 ]
